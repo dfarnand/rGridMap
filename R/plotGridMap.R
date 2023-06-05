@@ -36,7 +36,8 @@ plotGridMap <- function(x,
                         label_var = index_var,
                         label_color_var = NULL,
                         label_color = 'black',
-                        outline_color = 'black') {
+                        outline_color = 'black',
+                        ...) {
 
   plot_dat <-
     merge.data.frame(x, getStateHexPoly(layout = layout, label_col = index_var), by = index_var)
@@ -45,11 +46,14 @@ plotGridMap <- function(x,
   plot_dat <- plot_dat[order(plot_dat[, index_var],
                              plot_dat$order), ]
   gg <-
-    ggplot2::ggplot() +
-    ggplot2::geom_polygon(data = plot_dat,
-                 aes_string(x='draw_x', y='draw_y',
-                            group=index_var, fill=fill_var),
-                 color = outline_color) +
+    ggplot2::ggplot(data = plot_dat, aes_string(...)) +
+    ggplot2::geom_polygon(
+      ggplot2::aes_string(
+        x = "draw_x", y = "draw_y",
+        group = index_var, fill = fill_var
+      ),
+      color = outline_color
+    ) +
     ggplot2::coord_fixed() +
     theme_hexmap()
 
@@ -63,7 +67,6 @@ plotGridMap <- function(x,
         aes_string(x = 'lab_x',  y = 'lab_y', label = label_var),
         size = 3, color = label_color)
     } else {
-
       # if we are mapping color to a scale
       gg <- gg + ggplot2::geom_text(
         data = subset(plot_dat, order==1),
