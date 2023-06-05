@@ -30,24 +30,25 @@
 #'  labs(title = 'States by Category', fill = 'Category')
 
 plotGridMap <- function(x,
-                        state_var = 'state.abb',
+                        layout = 'state',
+                        index_var = 'state.abb',
                         fill_var, alpha_var = NULL,
-                        label_var = state_var,
+                        label_var = index_var,
                         label_color_var = NULL,
                         label_color = 'black',
                         outline_color = 'black') {
 
   plot_dat <-
-    merge.data.frame(x, getStateHexPoly(label_col = state_var), by = state_var)
+    merge.data.frame(x, getStateHexPoly(layout = layout, label_col = index_var), by = index_var)
 
   # resort to fix drawing order
-  plot_dat <- plot_dat[order(plot_dat[, state_var],
+  plot_dat <- plot_dat[order(plot_dat[, index_var],
                              plot_dat$order), ]
   gg <-
     ggplot2::ggplot() +
     ggplot2::geom_polygon(data = plot_dat,
                  aes_string(x='draw_x', y='draw_y',
-                            group=state_var, fill=fill_var),
+                            group=index_var, fill=fill_var),
                  color = outline_color) +
     ggplot2::coord_fixed() +
     theme_hexmap()
