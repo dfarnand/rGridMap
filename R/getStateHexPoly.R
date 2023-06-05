@@ -44,7 +44,7 @@ getNYSCountyLayout <- function() {
     label = c(
       "SI", "NY", "BK", "BX", "QU",
       "NA", "SU", "RO", "WE", "OR", "PU", "CH", "CA", "AG", "ST", "CM",
-      "TI", "BM", "SV", "UL", "DU", "ER", "WY", "YA", "SY", "YO", "CR",
+      "TI", "BM", "SV", "UL", "DU", "ER", "WY", "YA", "SY", "TO", "CR",
       "DE", "GR", "CO", "GE", "LI", "OT", "SE", "OD", "CN", "SH", "AL",
       "RE", "NI", "OL", "MO", "WA", "CY", "MA", "MG", "SC", "SA", "OS",
       "ON", "OG", "FU", "WS", "JE", "LE", "HE", "WR", "SL", "HA", "ES",
@@ -99,14 +99,13 @@ getStateHexPoly <- function(layout = "state", label_col = "state.abb") {
     layout <- getOtherLayout(layout)
   }
 
-
   # replicate hex for each state
   hexes <- data.frame(hex,
-    state.abb = rep(layout$label, each = nrow(hex)),
+    label = rep(layout$label, each = nrow(hex)),
     stringsAsFactors = F
   )
 
-  hex_states <- merge(hexes, layout)
+  hex_states <- merge(hexes, layout, by = "label")
 
   # poly points for each state hex
   hex_states <- within(hex_states, {
