@@ -38,7 +38,7 @@ plotGridMap <- function(x,
                         outline_color = 'black') {
 
   plot_dat <-
-    merge.data.frame(x, getStateHexPoly(state_col = state_var), by = state_var)
+    merge.data.frame(x, getStateHexPoly(label_col = state_var), by = state_var)
 
   # resort to fix drawing order
   plot_dat <- plot_dat[order(plot_dat[, state_var],
@@ -72,13 +72,13 @@ plotGridMap <- function(x,
     }
   }
 
-#   # for categorical data, kill slashes in legend box
-#   # (no longer needed with ggplot 2.0.0)
-#   if (class(plot_dat[, fill_var]) %in% c('character', 'factor')) {
-#     gg <- gg +
-#     guides(fill = guide_legend(override.aes = list(colour = NULL))) +
-#     theme(legend.key = element_rect(colour = 'black'))
-#   }
+  #   # for categorical data, kill slashes in legend box
+  #   # (no longer needed with ggplot 2.0.0)
+  #   if (class(plot_dat[, fill_var]) %in% c('character', 'factor')) {
+  #     gg <- gg +
+  #     guides(fill = guide_legend(override.aes = list(colour = NULL))) +
+  #     theme(legend.key = element_rect(colour = 'black'))
+  #   }
 
   return(gg)
 }
