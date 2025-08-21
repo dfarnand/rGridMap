@@ -4,9 +4,16 @@
 \alias{plotGridMap}
 \title{Plots a filled grid map of US states, represented as hexagons}
 \usage{
-plotGridMap(x, state_var = "state.abb", fill_var, alpha_var = NULL,
-  label_var = state_var, label_color_var = NULL,
-  label_color = "black", outline_color = "black")
+plotGridMap(
+  x,
+  state_var = "state.abb",
+  fill_var,
+  alpha_var = NULL,
+  label_var = state_var,
+  label_color_var = NULL,
+  label_color = "black",
+  outline_color = "black"
+)
 }
 \arguments{
 \item{x}{data.frame with data to plot}
@@ -41,6 +48,6 @@ my_dat <- data.frame(state.abb = c(state.abb, 'DC'),
 
 # note you can manipulate the resultant object as you would any ggplot object
 my_grid_map +
- scale_fill_brewer(type='qual') +
- labs(title = 'States by Category', fill = 'Category')
+ ggplot::scale_fill_brewer(type='qual') +
+ ggplot::labs(title = 'States by Category', fill = 'Category')
 }

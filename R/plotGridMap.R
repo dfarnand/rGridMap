@@ -9,13 +9,10 @@
 #' @param label_color_var if NULL, then labels have a fixed color (specified by \code{label_color}). Otherwise, name of column in \code{x} to use for label color scale
 #' @param label_color color for label text. Has no effect if you pass a value to \code{label_color_var}
 #' @param outline_color color for state hex outlines
-#'
-#' @import ggplot2
-#'
+#' 
+#' @returns Returns a ggplot
 #' @export
-#'
-#' @return Returns a ggplot
-#'
+#' 
 #' @examples
 #' # a data.frame of states with random categorical value
 #' my_dat <- data.frame(state.abb, value=sample(LETTERS[1:5], 50, replace=T))
@@ -26,8 +23,8 @@
 #'
 #' # note you can manipulate the resultant object as you would any ggplot object
 #' my_grid_map +
-#'  scale_fill_brewer(type='qual') +
-#'  labs(title = 'States by Category', fill = 'Category')
+#'  ggplot::scale_fill_brewer(type='qual') +
+#'  ggplot::labs(title = 'States by Category', fill = 'Category')
 
 plotGridMap <- function(x,
                         state_var = 'state.abb',

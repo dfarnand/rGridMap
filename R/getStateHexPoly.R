@@ -1,7 +1,6 @@
 # getStateHexPoly
 # ' Internal function that creates and returns a data.frame with polygon
 # ' points for the grid map
-
 getStateHexPoly <- function(state_col = 'state.abb') {
 
   # polygon points for one hex
